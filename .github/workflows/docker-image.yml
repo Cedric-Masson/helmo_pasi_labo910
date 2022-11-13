@@ -16,12 +16,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag hello-world-image
-    - uses: azure/container-scan@v0
-      with:
-        image-name: hello-world-image
     - uses: Azure/docker-login@v1
       with:
         login-server: ${{ secrets.REGISTRY_ENDPOINT }}
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: docker push ${{ secrets.REGISTRY_ENDPOINT }}/helloworld:ue19
+    - uses: azure/container-scan@v0
+      with:
+        image-name: hello-world-image
