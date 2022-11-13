@@ -17,11 +17,9 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag hello-world-image
     - uses: azure/container-scan@v0
-    - name: Scan with Azure Container Scan
       with:
         image-name: hello-world-image
     - uses: Azure/docker-login@v1
-    - name: Push the image to Azure Container Registry
       with:
         login-server: ${{ secrets.REGISTRY_ENDPOINT }}
         username: ${{ secrets.REGISTRY_USERNAME }}
